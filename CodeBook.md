@@ -36,7 +36,7 @@ Sazia Mahfuz
 
 
 The complete transformation process in the run_analysis.R can be broken down into the folloswing steps:
-==================================================================
+=======================================
 -Adding Descriptive Activity names to Test Data
 
 -Adding Descriptive Activity names to Train Data
