@@ -1,9 +1,8 @@
 ==================================================================
 Code book for run_analysis.R
-
 ==================================================================
 Sazia Mahfuz
-==================================================================
+==========================================
 -Train: The data frame containing data set given in Dataset/train/X_train.txt
 
 -Train.label: The data frame containing data set given in Dataset/train/y_train.txt
