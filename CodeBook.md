@@ -34,4 +34,26 @@ Data: The cumulative indices from Mean.data and Std.data
 
 Result: The data frame containing the tidy data set with the average of each variable for each activity and each subject
 
+The complete transformation process in the run_analysis.R can be broken down into the folloswing steps:
+
+-Adding Descriptive Activity names to Test Data
+
+-Adding Descriptive Activity names to Train Data
+
+-Adding Subject information to Test Data
+
+-Adding Subject information to Train Data
+
+-Creating Descriptive variable names for the data
+
+-Adding Descriptive variable names to the data
+
+-Merging Train and test data with activity label, subject and variable names
+
+-Determining the variable indices for mean and standard deviation measurements
+
+-Extracting mean and standard deviation measurements from the merged data
+
+-Creating Tidy data set with the average of each variable for each activity and each subject
+
 
