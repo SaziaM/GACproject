@@ -1,52 +1,49 @@
-a<-read.table("Dataset/train/X_train.txt")
-b<-read.table("Dataset/train/y_train.txt")
-c<-read.table("Dataset/test/X_test.txt")
-d<-read.table("Dataset/test/y_test.txt")
-st1<-read.table("Dataset/train/subject_train.txt")
-st2<-read.table("Dataset/test/subject_test.txt")
-act<-read.table("Dataset/activity_labels.txt")
-feat<-read.table("Dataset/features.txt")
+Train<-read.table("Dataset/train/X_train.txt")
+Train.label<-read.table("Dataset/train/y_train.txt")
+Test<-read.table("Dataset/test/X_test.txt")
+Test.label<-read.table("Dataset/test/y_test.txt")
+Train.subject<-read.table("Dataset/train/subject_train.txt")
+Test.subject<-read.table("Dataset/test/subject_test.txt")
+activity<-read.table("Dataset/activity_labels.txt")
+feature<-read.table("Dataset/features.txt")
 
 for(i in 1:2947)
 {
-t<-d[i,1]
-c[i,562]<-as.character(act[t,2])
+temp<-Test.label[i,1]
+Test[i,562]<-as.character(activity[temp,2])
 }
 
 for(i in 1:7352)
 {
-t<-b[i,1]
-a[i,562]<-as.character(act[t,2])
+temp<-Train.label[i,1]
+Train[i,562]<-as.character(activity[temp,2])
 }
 
-
 for(i in 1:2947)
-c[i,563]<-st2[i,1]
+Test[i,563]<-Test.subject[i,1]
 
 for(i in 1:7352)
-a[i,563]<-st1[i,1]
+Train[i,563]<-Train.subject[i,1]
 
-f<-data.frame()
+final.names<-data.frame()
 for(i in 1:561)
 {
-f[1,i]<-as.character(feat[i,2])
+final.names[1,i]<-as.character(feature[i,2])
 }
-f[1,562]<-"Activity"
-f[1,563]<-"Subject"
+final.names[1,562]<-"Activity"
+final.names[1,563]<-"Subject"
 
-names(a)<-f[names(a)]
-names(c)<-f[names(c)]
+names(Train)<-final.names[names(Train)]
+names(Test)<-final.names[names(Test)]
 
 #Train and test data with activity label and subject
-Data<-rbind(a,c) 
-library(dplyr)
-Final<-tbl_df(Data)
-w<-grep("mean",names(Final),value=FALSE)
-z<-grep("std",names(Final),value=FALSE)
-x<-c(w,z)
-x<-sort(x)
-x<-c(x,562,563)
-Final<-subset(Final,select=x)
+Final<-rbind(Train,Test) 
+Mean.data<-grep("mean",names(Final),value=FALSE)
+Std.data<-grep("std",names(Final),value=FALSE)
+Data<-c(Mean.data,Std.data)
+Data<-sort(Data)
+Data<-c(Data,562,563)
+Final<-subset(Final,select=Data)
 
 Result<-aggregate(Final[,1:79],list(Activity=Final$Activity,Subject=Final$Subject),mean)
 
